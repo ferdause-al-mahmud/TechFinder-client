@@ -1,7 +1,44 @@
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import useAuth from "../../Hooks/useAuth";
 
 const Login = () => {
+    const { signIn, setLoading, loading, signInWithGoogle } = useAuth();
+    const navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state?.from?.pathname || "/";
+    const handleGoogleSignIn = async () => {
+        try {
+            const result = await signInWithGoogle()
+            console.log(result)
+
+            navigate(from, { replace: true });
+            toast.success('Signup Successful')
+        } catch (err) {
+            console.log(err)
+            toast.error(err.message)
+            setLoading(false)
+        }
+    }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const form = e.target
+        const email = form.email.value
+        const password = form.password.value
+
+        try {
+            setLoading(true)
+            await signIn(email, password);
+            navigate(from, { replace: true });
+            toast.success('Login Successful')
+        } catch (err) {
+            console.log(err)
+            toast.error(err.message.split('/')[1])
+            setLoading(false)
+        }
+    }
+
     return (
         <div className='flex justify-center items-center min-h-[80vh] py-6'>
             <div className="flex flex-col md:min-w-[500px] p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
@@ -11,7 +48,7 @@ const Login = () => {
                         Sign in to access your account
                     </p>
                 </div>
-                <form className="space-y-2 ">
+                <form onSubmit={handleSubmit} className="space-y-2 ">
                     <div className="flex flex-col">
                         <label htmlFor="email" className="text-md">Email address</label>
                         <input
@@ -50,13 +87,13 @@ const Login = () => {
                     <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
                 </div>
                 <div className='flex gap-8 justify-center mb-3'>
-                    <button ><FcGoogle className='text-3xl' /></button>
+                    <button onClick={handleGoogleSignIn}><FcGoogle className='text-3xl' /></button>
                 </div>
                 <p className='px-6 text-sm text-center text-gray-400'>
                     Don&apos;t have an account yet?{' '}
                     <Link
                         to='/register'
-                        className='hover:underline hover:text-[#ff946b] text-gray-600'
+                        className='hover:underline hover:text-blue-400 text-gray-600'
                     >
                         Register
                     </Link>

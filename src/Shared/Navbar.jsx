@@ -1,12 +1,21 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import useAuth from "../Hooks/useAuth";
 
 
 const Navbar = () => {
+    const { user, logOut } = useAuth();
     const links = <>
         <li><NavLink to='/'>Home</NavLink></li>
-        <li><NavLink to='/login'>Login</NavLink></li>
-        <li><NavLink to='/register'>Register</NavLink></li>
     </>;
+    const handleLogOut = async () => {
+        try {
+            await logOut()
+            console.log("succesfully logout")
+        } catch (error) {
+            console.log("didnt logout", error)
+        }
+
+    }
     return (
         <div>
             <div className="navbar bg-black bg-opacity-70 text-white">
@@ -40,7 +49,21 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Button</a>
+                    <button className="p-4 bg-base-100 text-black rounded-lg">
+                        {
+                            user ?
+                                <>
+                                    <div onClick={handleLogOut} className="bg-base-100 text-black rounded-lg">
+                                        Logout
+                                    </div>
+                                </> :
+                                <>
+                                    <Link to={'/login'} className="hover:text-blue-400 ">Login</Link>/
+                                    <Link to={'/register'} className="hover:text-blue-400 ">register</Link>
+                                </>
+                        }
+
+                    </button>
                 </div>
             </div>
         </div>

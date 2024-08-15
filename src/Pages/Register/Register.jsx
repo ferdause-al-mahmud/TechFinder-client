@@ -1,7 +1,39 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
+import { toast } from "react-toastify";
 
 
 const Register = () => {
+    const navigate = useNavigate()
+    const {
+        createUser,
+        updateUserProfile,
+        loading,
+        logOut,
+        setLoading,
+    } = useAuth()
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const form = e.target
+        const name = form.name.value
+        const email = form.email.value
+        const password = form.password.value
+        const image = form.image.files[0]
+        console.log(name, email, password, image)
+        try {
+            setLoading(true)
+            const result = await createUser(email, password)
+            await updateUserProfile(name)
+            console.log(result)
+            logOut()
+            navigate('/login')
+            toast.success('Signup Successful, please login')
+        } catch (err) {
+            console.log(err)
+            toast.error(err.message)
+            setLoading(false)
+        }
+    }
     return (
         <div className='flex justify-center items-center min-h-[80vh] py-6'>
             <div className="flex flex-col md:min-w-[500px] p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
@@ -11,7 +43,7 @@ const Register = () => {
                         Sign up with your email
                     </p>
                 </div>
-                <form className="space-y-2 ">
+                <form onSubmit={handleSubmit} className="space-y-2 ">
                     <div className="flex flex-col">
                         <label htmlFor="name" className="text-md">Your name</label>
                         <input
@@ -51,7 +83,7 @@ const Register = () => {
                             Select Image:
                         </label>
                         <input
-                            required
+                            // required
                             type='file'
                             id='image'
                             name='image'
@@ -59,6 +91,7 @@ const Register = () => {
                         />
                     </div>
                     <button
+                        disabled={loading}
                         type='submit'
                         className='btn btn-primary w-full rounded-md text-white'
                     >
