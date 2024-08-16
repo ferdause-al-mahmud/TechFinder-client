@@ -1,11 +1,9 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
-import { BiSearch } from "react-icons/bi";
-import { useState } from "react";
 
 
 const Navbar = () => {
-    const [openSearch, setOpenSearch] = useState(false);
+
     const { user, logOut } = useAuth();
     const links = <>
         <li><NavLink to='/'>Home</NavLink></li>
@@ -19,7 +17,6 @@ const Navbar = () => {
         }
 
     }
-    console.log(openSearch)
     return (
         <div className="relative">
             <div className="navbar bg-black bg-opacity-70 text-white">
@@ -51,12 +48,9 @@ const Navbar = () => {
                     <ul className="menu menu-horizontal px-1">
                         {links}
                     </ul>
-                    <div>
-                        <input type="text" placeholder="Search" className="input input-bordered w-full max-w-xs" />
-                    </div>
+
                 </div>
                 <div className="navbar-end">
-                    <div onClick={() => setOpenSearch(!openSearch)} className="lg:hidden text-3xl mr-1 sm:mr-3"><BiSearch></BiSearch></div>
                     <button className=" p-2 sm:p-4 bg-base-100 text-black rounded-lg">
                         {
                             user ?
@@ -73,12 +67,6 @@ const Navbar = () => {
 
                     </button>
                 </div>
-            </div>
-            <div className="absolute w-full shadow-xl lg:hidden">
-                {
-                    openSearch && <input type="text" placeholder="Search" className="input input-bordered w-full" />
-
-                }
             </div>
         </div>
     );

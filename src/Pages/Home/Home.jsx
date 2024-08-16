@@ -15,7 +15,7 @@ const Home = () => {
                 <div className="hidden xl:flex">
                     <LeftContainer />
                 </div>
-                <div>
+                <div className="flex-grow">
                     <RightContainer />
                 </div>
             </div>
