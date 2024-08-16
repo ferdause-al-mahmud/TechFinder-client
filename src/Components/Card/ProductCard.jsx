@@ -11,7 +11,7 @@ const ProductCard = ({ product }) => {
                     className="rounded-xl" />
             </figure>
             <div className="flex flex-col gap-2 p-4">
-                <div className="flex flex-col gap-2 p-4">
+                <div className="flex flex-col gap-2 p-2 xl:p-4">
                     <h2 className="text-2xl font-bold text-center">{productName}</h2>
                     <h4 className="font-medium text-lg"><span className="mr-2">Brand:</span>{brand}</h4>
                     <h4 className="font-medium text-lg"><span className="mr-2">Category:</span>{category}</h4>

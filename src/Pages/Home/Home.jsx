@@ -11,9 +11,13 @@ const Home = () => {
                 <title>TechFinder | Home</title>
             </Helmet>
             {/* <Banner></Banner> */}
-            <div className="flex gap-6 lg:px-10 py-6">
-                <LeftContainer />
-                <RightContainer />
+            <div className="flex gap-6 px-4 lg:px-10 py-6">
+                <div className="hidden xl:flex">
+                    <LeftContainer />
+                </div>
+                <div>
+                    <RightContainer />
+                </div>
             </div>
         </div>
     );
