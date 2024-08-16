@@ -2,6 +2,7 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useAuth from "../../Hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
     const { signIn, setLoading, loading, signInWithGoogle } = useAuth();
@@ -41,6 +42,9 @@ const Login = () => {
 
     return (
         <div className='flex justify-center items-center min-h-[80vh] py-6'>
+            <Helmet>
+                <title>TechFinder | Login</title>
+            </Helmet>
             <div className="flex flex-col md:min-w-[500px] p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
                 <div className='mb-8 text-center'>
                     <h1 className='my-3 text-4xl font-bold'>Log In</h1>
@@ -73,6 +77,7 @@ const Login = () => {
                         />
                     </div>
                     <button
+                        disabled={loading}
                         type='submit'
                         className='btn btn-primary w-full rounded-md text-white'
                     >
