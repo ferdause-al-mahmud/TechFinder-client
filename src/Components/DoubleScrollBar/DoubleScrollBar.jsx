@@ -9,7 +9,7 @@ const valuetext = (value) => {
 const minDistance = 0;
 
 const MinimumDistanceSlider = () => {
-    const [value1, setValue1] = useState([500, 1000]);
+    const [value1, setValue1] = useState([0, 3000]);
 
     const handleChange1 = (event, newValue, activeThumb) => {
         if (!Array.isArray(newValue)) {
@@ -37,38 +37,44 @@ const MinimumDistanceSlider = () => {
 
     return (
         <>
-            <Box sx={{ width: 300 }}>
-                <Slider
-                    getAriaLabel={() => 'Minimum distance'}
-                    value={value1}
-                    onChange={handleChange1}
-                    valueLabelDisplay="auto"
-                    getAriaValueText={valuetext}
-                    disableSwap
-                    min={100}
-                    max={3000}
-                />
-            </Box>
-            <div className='flex justify-between p-4'>
-                <input
-                    placeholder='Minimum'
-                    className='border w-1/2 font-medium'
-                    type="text"
-                    value={value1[0]}
-                    onChange={handleInputChangeMin}
-                    min={100}
-                    max={value1[1] - minDistance}
-                    style={{ marginRight: 10 }}
-                />
-                <input
-                    placeholder='Maximum'
-                    className='border w-1/2 font-medium'
-                    type="text"
-                    value={value1[1]}
-                    onChange={handleInputChangeMax}
-                    min={value1[0] + minDistance}
-                    max={3000}
-                />
+            <div className='flex justify-center'>
+                <Box sx={{ width: 300 }}>
+                    <Slider
+                        getAriaLabel={() => 'Minimum distance'}
+                        value={value1}
+                        onChange={handleChange1}
+                        valueLabelDisplay="auto"
+                        getAriaValueText={valuetext}
+                        disableSwap
+                        min={100}
+                        max={3000}
+                    />
+                </Box>
+            </div>
+            <div className='flex justify-between gap-4 p-4'>
+                <div className='flex flex-col w-1/2 '>
+                    <label htmlFor="">Minimum</label>
+                    <input
+                        className='border p-2 w-full font-medium'
+                        type="text"
+                        value={value1[0]}
+                        onChange={handleInputChangeMin}
+                        min={100}
+                        max={value1[1] - minDistance}
+                        style={{ marginRight: 10 }}
+                    />
+                </div>
+                <div className='flex flex-col w-1/2'>
+                    <label htmlFor="">Maximum</label>
+                    <input
+                        className='border p-2 w-full font-medium'
+                        type="text"
+                        value={value1[1]}
+                        onChange={handleInputChangeMax}
+                        min={value1[0] + minDistance}
+                        max={3000}
+                    />
+                </div>
             </div>
         </>
     );
