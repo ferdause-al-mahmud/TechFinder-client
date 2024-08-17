@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
@@ -8,9 +9,11 @@ const valuetext = (value) => {
 
 const minDistance = 0;
 
-const MinimumDistanceSlider = () => {
+const MinimumDistanceSlider = ({ setMax, setMin }) => {
     const [value1, setValue1] = useState([0, 3000]);
-
+    // console.log(value1[0], value1[1])
+    setMin(value1[0])
+    setMax(value1[1])
     const handleChange1 = (event, newValue, activeThumb) => {
         if (!Array.isArray(newValue)) {
             return;
@@ -27,12 +30,15 @@ const MinimumDistanceSlider = () => {
     const handleInputChangeMin = (event) => {
         const newValue = Math.min(Number(event.target.value), value1[1] - minDistance);
         setValue1([newValue, value1[1]]);
+        console.log(value1[0])
     };
 
     // Handle input change for the second value
     const handleInputChangeMax = (event) => {
         const newValue = Math.max(Number(event.target.value), value1[0] + minDistance);
         setValue1([value1[0], newValue]);
+        console.log(value1[1])
+
     };
 
     return (

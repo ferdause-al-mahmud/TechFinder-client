@@ -1,31 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
-import useAxiosCommon from "../../Hooks/useAxiosCommon";
+/* eslint-disable react/prop-types */
+// import { useQuery } from "@tanstack/react-query";
+// import useAxiosCommon from "../../Hooks/useAxiosCommon";
+// import { useState } from "react";
 import ProductCard from "../../Components/Card/ProductCard";
-import { useState } from "react";
 import Pagination from "../../Components/Pagination/Pagination";
 import { BiSearch } from "react-icons/bi";
 
-const RightContainer = () => {
-    const axiosCommon = useAxiosCommon();
-    const [currentPage, setCurrentPage] = useState(1);
-    const [openSearch, setOpenSearch] = useState(false);
-    const [search, setSearch] = useState('');
-    const [order, setOrder] = useState('');
-    const [dateOrder, setDateOrder] = useState('');
-    const productsPerPage = 12;
-    const lastIndex = currentPage * productsPerPage;
-    const firstIndex = lastIndex - productsPerPage;
-
-    const { data: pro = [], isLoading } = useQuery({
-        queryKey: ['pro', search, order, dateOrder],
-        queryFn: async () => {
-            const { data } = await axiosCommon.get(`/products?name=${search}&order=${order}&dateOrder=${dateOrder}`)
-            return data
-        },
-    })
-    const products = pro.slice(firstIndex, lastIndex);
-    const npage = Math.ceil(pro.length / productsPerPage)
-    const numbers = [...Array(npage + 1).keys()].slice(1)
+const RightContainer = ({ setCurrentPage, setOpenSearch, setSearch, setOrder, setDateOrder, products, npage, numbers, dateOrder, openSearch, order, currentPage }) => {
 
     const handleOrderChange = (event) => {
         const selectedOrder = event.target.value;

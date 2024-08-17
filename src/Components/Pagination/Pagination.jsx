@@ -16,7 +16,7 @@ const Pagination = ({ setCurrentPage, currentPage, numbers, npage }) => {
     }
     return (
         <div className="flex items-center justify-center mt-6">
-            <a href={currentPage === 1 ? undefined : "#"} className={`px-4 py-2 mx-1 text-gray-500 capitalize bg-white rounded-md dark:bg-gray-800 dark:text-gray-600 ${currentPage === 1 ? 'cursor-not-allowed disabled' : 'cursor-pointer hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200'} `}>
+            <a href={currentPage === 1 ? undefined : "#"} className={`px-4 py-2 mx-1 text-gray-700 capitalize bg-white rounded-md dark:bg-gray-800 dark:text-gray-600 ${currentPage === 1 ? 'cursor-not-allowed disabled' : 'cursor-pointer hover:bg-blue-500 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200'} `}>
                 <div className="flex items-center -mx-1">
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mx-1 rtl:-scale-x-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
