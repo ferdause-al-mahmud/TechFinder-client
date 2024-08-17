@@ -2,7 +2,7 @@
 import axios from 'axios'
 
 export const axiosCommon = axios.create({
-    baseURL: 'http://localhost:8000',
+    baseURL: 'https://tech-finder-server.vercel.app',
 })
 const useAxiosCommon = () => {
     return axiosCommon

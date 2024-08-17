@@ -58,8 +58,8 @@ const Home = () => {
             </Helmet>
             {/* <Banner></Banner> */}
             <div className="flex gap-6 px-4 lg:px-10 py-6">
-                <div className={` ${filterContainer ? 'absolute inset-0 top-[200px] z-50 bg-black bg-opacity-60' : 'hidden'} flex justify-center xl:flex `}>
-                    <div className="h-[calc(100vh-200px)] min-h-[600px] bg-white flex flex-col overflow-y-auto">
+                <div className={` ${filterContainer ? 'absolute inset-0 top-[220px] sm:top-[200px] z-50 bg-black bg-opacity-60' : 'hidden'} flex justify-center xl:flex `}>
+                    <div className="h-[calc(100vh-200px)] min-h-[600px] xl:h-full flex flex-col overflow-y-auto xl:overflow-hidden">
                         <LeftContainer setMin={setMin} setMax={setMax} setBrand={setBrand} setCat={setCat} />
                     </div>
                 </div>
