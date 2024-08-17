@@ -6,7 +6,7 @@ import ProductCard from "../../Components/Card/ProductCard";
 import Pagination from "../../Components/Pagination/Pagination";
 import { BiFilter, BiSearch } from "react-icons/bi";
 
-const RightContainer = ({ setCurrentPage, setOpenSearch, setSearch, setOrder, setDateOrder, products, npage, numbers, dateOrder, openSearch, order, currentPage, setFilterContainer, filterContainer, isLoading }) => {
+const RightContainer = ({ setCurrentPage, setOpenSearch, setSearch, setOrder, setDateOrder, products, npage, numbers, dateOrder, openSearch, order, currentPage, setFilterContainer, filterContainer, isLoading, handleAddToCard }) => {
 
     const handleOrderChange = (event) => {
         const selectedOrder = event.target.value;
@@ -84,7 +84,7 @@ const RightContainer = ({ setCurrentPage, setOpenSearch, setSearch, setOrder, se
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                        {products.map((product, idx) => <ProductCard product={product} key={idx} />)}
+                        {products.map((product, idx) => <ProductCard handleAddToCard={handleAddToCard} product={product} key={idx} />)}
                     </div>
                 )}
 

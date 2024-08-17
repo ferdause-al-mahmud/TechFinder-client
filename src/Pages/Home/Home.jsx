@@ -5,6 +5,8 @@ import RightContainer from "./RightContainer";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
+import { FaCartShopping } from "react-icons/fa6";
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 
 const Home = () => {
@@ -19,6 +21,7 @@ const Home = () => {
     const [dateOrder, setDateOrder] = useState('');
     const [brand, setBrand] = useState('');
     const [cat, setCat] = useState('');
+    const [cart, setCart] = useState(0);
     const productsPerPage = 9;
     const lastIndex = currentPage * productsPerPage;
     const firstIndex = lastIndex - productsPerPage;
@@ -50,7 +53,16 @@ const Home = () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
-
+    const handleAddToCard = () => {
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Product added to cart",
+            showConfirmButton: false,
+            timer: 1500
+        });
+        setCart(cart + 1)
+    }
     return (
         <div className={`${filterContainer ? 'bg-black bg-opacity-60' : 'bg-[#f2f4f8]'}  min-h-screen`}>
             <Helmet>
@@ -82,7 +94,19 @@ const Home = () => {
                         currentPage={currentPage}
                         setFilterContainer={setFilterContainer}
                         filterContainer={filterContainer}
+                        handleAddToCard={handleAddToCard}
                     />
+                </div>
+            </div>
+            <div className="fixed bottom-8 right-4 rounded-md text-white p-4 bg-black z-40">
+                <div className="relative">
+                    {/* Cart Button */}
+                    <button><FaCartShopping className="text-2xl" /></button>
+
+                    {/* Cart Badge */}
+                    <div className="absolute -top-7 -right-7 bg-blue-300 rounded-full px-2 text-sm flex items-center justify-center h-7 w-7">
+                        <p>{cart}</p>
+                    </div>
                 </div>
             </div>
         </div>

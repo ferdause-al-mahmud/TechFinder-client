@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, handleAddToCard }) => {
     const { productImage, productName, description, price, category, ratings, brand } = product
     return (
         <div className="justify-between card bg-base-100 shadow-xl hover:scale-105 transition">
@@ -26,7 +26,7 @@ const ProductCard = ({ product }) => {
 
                 <div className="w-full flex flex-col gap-2">
                     <h4 className="font-bold text-xl text-[#F27A56] text-center">{price} $</h4>
-                    <button className="btn btn-primary w-full">Add to cart</button>
+                    <button onClick={handleAddToCard} className="btn btn-primary w-full">Add to cart</button>
                 </div>
             </div>
         </div>
