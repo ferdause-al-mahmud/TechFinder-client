@@ -4,9 +4,9 @@
 // import { useState } from "react";
 import ProductCard from "../../Components/Card/ProductCard";
 import Pagination from "../../Components/Pagination/Pagination";
-import { BiSearch } from "react-icons/bi";
+import { BiFilter, BiSearch } from "react-icons/bi";
 
-const RightContainer = ({ setCurrentPage, setOpenSearch, setSearch, setOrder, setDateOrder, products, npage, numbers, dateOrder, openSearch, order, currentPage }) => {
+const RightContainer = ({ setCurrentPage, setOpenSearch, setSearch, setOrder, setDateOrder, products, npage, numbers, dateOrder, openSearch, order, currentPage, setFilterContainer, filterContainer, isLoading }) => {
 
     const handleOrderChange = (event) => {
         const selectedOrder = event.target.value;
@@ -38,8 +38,8 @@ const RightContainer = ({ setCurrentPage, setOpenSearch, setSearch, setOrder, se
                                 <path fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clipRule="evenodd" /></svg>
                         </div>
                     </div>
-                    <div className="flex justify-center items-center gap-3">
-                        <div onClick={() => setOpenSearch(!openSearch)} className="lg:hidden text-3xl ml-1 sm:mr-3"><BiSearch></BiSearch></div>
+                    <div className="flex justify-between items-center gap-3">
+                        <div onClick={() => setOpenSearch(!openSearch)} className=" flex gap-2 lg:hidden ml-1 sm:mr-3"><label>Search</label><BiSearch className=" text-3xl "></BiSearch></div>
                         <div className=" flex gap-1 sm:gap-4 justify-center items-center">
 
                             <div className="border p-2">
@@ -54,25 +54,40 @@ const RightContainer = ({ setCurrentPage, setOpenSearch, setSearch, setOrder, se
                             </div>
                         </div>
                     </div>
-                    <div className=" flex gap-1 sm:gap-4 justify-center items-center">
+                    <div className="flex justify-between items-center gap-3">
+                        <div className=" flex gap-1 sm:gap-4 justify-center items-center">
 
-                        <label>Sort By:</label>
-                        <div className="border p-2">
-                            <select value={order}
-                                onChange={handleOrderChange}
-                            >
-                                <option value=''>Default</option>
-                                <option value="1">Price (Low &gt; High)</option>
-                                <option value="-1">Price (High &gt; Low)</option>
-                            </select>
+                            <label>Sort By:</label>
+                            <div className="border p-2">
+                                <select value={order}
+                                    onChange={handleOrderChange}
+                                >
+                                    <option value=''>Default</option>
+                                    <option value="1">Price (Low &gt; High)</option>
+                                    <option value="-1">Price (High &gt; Low)</option>
+                                </select>
+                            </div>
                         </div>
+                        <div onClick={() => setFilterContainer(!filterContainer)} className="flex xl:hidden ml-1 sm:mr-3"><BiFilter className=" text-3xl"></BiFilter><label>Filter</label></div>
                     </div>
                 </div>
-                <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                    {
-                        products.map((product, idx) => <ProductCard product={product} key={idx}></ProductCard>)
-                    }
-                </div>
+                {isLoading ? (
+                    <div className="flex justify-center items-center h-[60vh]">
+                        <div className="loading loading-spinner loading-lg"></div>
+                    </div>
+                ) : products.length === 0 ? (
+                    <div className="flex justify-center items-center h-[60vh]">
+                        <div className="text-center">
+                            <p className="text-gray-500 font-bold text-3xl">Sorry! No Products Found</p>
+                            <p className="text-gray-500 mt-2">Please try searching for something else</p>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                        {products.map((product, idx) => <ProductCard product={product} key={idx} />)}
+                    </div>
+                )}
+
                 <Pagination setCurrentPage={setCurrentPage} numbers={numbers} currentPage={currentPage} npage={npage} />
             </div>
 
