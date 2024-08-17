@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
+import { toast } from "react-toastify";
 
 
 const Navbar = () => {
@@ -11,7 +12,8 @@ const Navbar = () => {
     const handleLogOut = async () => {
         try {
             await logOut()
-            console.log("succesfully logout")
+            toast.success('Logged out successfully')
+
         } catch (error) {
             console.log("didnt logout", error)
         }
@@ -42,7 +44,7 @@ const Navbar = () => {
                             {links}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost pl-0 sm:pl-4 text-xl text-blue-400">TechFinder</a>
+                    <a className="btn btn-ghost pl-0 sm:pl-4 text-2xl font-bold text-blue-400">TechFinder</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">

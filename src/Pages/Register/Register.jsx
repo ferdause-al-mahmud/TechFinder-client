@@ -19,8 +19,6 @@ const Register = () => {
         const name = form.name.value
         const email = form.email.value
         const password = form.password.value
-        const image = form.image.files[0]
-        console.log(name, email, password, image)
         try {
             setLoading(true)
             const result = await createUser(email, password)
@@ -80,18 +78,6 @@ const Register = () => {
                             required
                             placeholder='*******'
                             className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-blue-400 bg-gray-200 text-gray-900'
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor='image' className='block mb-2 text-sm'>
-                            Select Image:
-                        </label>
-                        <input
-                            // required
-                            type='file'
-                            id='image'
-                            name='image'
-                            accept='image/*'
                         />
                     </div>
                     <button
