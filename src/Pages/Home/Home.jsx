@@ -16,16 +16,16 @@ const Home = () => {
     const [search, setSearch] = useState('');
     const [order, setOrder] = useState('');
     const [dateOrder, setDateOrder] = useState('');
+    const [brand, setBrand] = useState('');
     const productsPerPage = 12;
     const lastIndex = currentPage * productsPerPage;
     const firstIndex = lastIndex - productsPerPage;
-    console.log(min)
-    console.log(max)
+    console.log(brand)
 
     const { data: pro = [], isLoading } = useQuery({
-        queryKey: ['pro', search, order, dateOrder],
+        queryKey: ['pro', search, order, dateOrder, brand],
         queryFn: async () => {
-            const { data } = await axiosCommon.get(`/products?name=${search}&order=${order}&dateOrder=${dateOrder}`)
+            const { data } = await axiosCommon.get(`/products?name=${search}&order=${order}&dateOrder=${dateOrder}&brand=${brand}`)
             return data
         },
     })
@@ -34,8 +34,6 @@ const Home = () => {
     const products = filterProducts.slice(firstIndex, lastIndex);
     const npage = Math.ceil(filterProducts.length / productsPerPage)
     const numbers = [...Array(npage + 1).keys()].slice(1)
-
-    console.log(filterProducts);
     return (
         <div className="bg-[#f2f4f8] min-h-screen">
             <Helmet>
@@ -44,7 +42,7 @@ const Home = () => {
             {/* <Banner></Banner> */}
             <div className="flex gap-6 px-4 lg:px-10 py-6">
                 <div className="hidden xl:flex">
-                    <LeftContainer setMin={setMin} setMax={setMax} />
+                    <LeftContainer setMin={setMin} setMax={setMax} setBrand={setBrand} />
                 </div>
                 <div className="flex-grow">
                     <RightContainer
