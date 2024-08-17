@@ -19,7 +19,7 @@ const Home = () => {
     const [dateOrder, setDateOrder] = useState('');
     const [brand, setBrand] = useState('');
     const [cat, setCat] = useState('');
-    const productsPerPage = 12;
+    const productsPerPage = 9;
     const lastIndex = currentPage * productsPerPage;
     const firstIndex = lastIndex - productsPerPage;
     console.log(cat)
